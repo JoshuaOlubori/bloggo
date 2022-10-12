@@ -5,8 +5,17 @@ from .models import Post
 
 def post_list(request):
     posts = Post.published.all()
-    return render(request, 'home.html', {'posts': posts})
+    #likes = Post
+    post_list = []
+    for post in posts:
+        
+        post_list.append({'post':post})
+    context = {'posts': post_list}
+    return render(request, 'blog/home.html', context)
 
 def post_detail(request, id):
     post = get_object_or_404(Post,id=id,status=Post.Status.PUBLISHED)
-    return render(request, 'detail.html')
+    return render(request, 'blog/view_post.html')
+
+def category_list(request):
+    return render(request, 'blog/category.html')

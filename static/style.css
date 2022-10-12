@@ -477,9 +477,9 @@ section{
    white-space: pre-line;
 }
 
-.posts-container .box-container .box .post-content::after{
-   content: '...';
-}
+/* .posts-container .box-container .box .post-content::after{ */
+/*   content: '...'; */
+/*} */
 
 .posts-container .box-container .box .post-cat{
    display: block;

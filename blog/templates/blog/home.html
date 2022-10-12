@@ -1,4 +1,4 @@
-{% load static %}
+
 <!-- 
 <?php
 
@@ -17,27 +17,13 @@ include 'components/like_post.php';
 ?>
 
 -->
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>home page</title>
-
-  <!-- font awesome cdn link  -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-
-  <link rel="stylesheet" href="{% static 'style.css' %}" />
-</head>
-
-<body>
+{% extends 'base.html' %}
   <!--
 <?php include 'components/user_header.php'; ?>
     -->
 
+{% block title %} Home Page {% endblock %}   
+{% block content %} 
   <section class="home-grid">
     <div class="box-container">
       <div class="box">
@@ -108,8 +94,8 @@ include 'components/like_post.php';
           <a href="category.php?category=sports" class="links">sports</a>
           <a href="category.php?category=design" class="links">design</a>
           <a href="category.php?category=fashion" class="links">fashion</a>
-          <a href="category.php?category=persional" class="links">persional</a>
-          <a href="all_category.php" class="btn">view all</a>
+          <a href="category.php?category=personal" class="links">personal</a>
+          <a href="{% url 'blog:category_list' %}" class="btn">view all</a>
         </div>
       </div>
 
@@ -164,18 +150,19 @@ include 'components/like_post.php';
                $confirm_likes->execute([$user_id, $post_id]);
       ?>
     -->
-
+    {% for item in posts %}
       <form class="box" method="post">
-        <input type="hidden" name="post_id" value="<?= $post_id; ?>" />
-        <input type="hidden" name="admin_id" value="<?= $fetch_posts['admin_id']; ?>" />
+        
+      <!-- <input type="hidden" name="post_id" value="<?= $post_id; ?>" /> -->
+       <!--  <input type="hidden" name="admin_id" value="<?= $fetch_posts  ['admin_id']; ?>" /> -->
         <div class="post-admin">
           <i class="fas fa-user"></i>
           <div>
-            <a href="author_posts.php?author=<?= $fetch_posts['name']; ?>">
-              <?= $fetch_posts['name']; ?>
+            <a href="#">
+              {{ item.post.author }}
             </a>
             <div>
-              <?= $fetch_posts['date']; ?>
+              {{ item.post.created }}
             </div>
           </div>
         </div>
@@ -191,16 +178,17 @@ include 'components/like_post.php';
          -->
 
         <div class="post-title">
-          <?= $fetch_posts['title']; ?>
+          {{ item.post.title }}
         </div>
         <div class="post-content content-150">
-          <?= $fetch_posts['content']; ?>
+          {{ item.post.content|truncatewords:30 }}
         </div>
-        <a href="view_post.php?post_id=<?= $post_id; ?>" class="inline-btn">read more</a>
+        <a href="{% url 'blog:post_detail' item.post.id %}" class="inline-btn">read more</a>
         <a href="category.php?category=<?= $fetch_posts['category']; ?>" class="post-cat">
           <i class="fas fa-tag"></i>
           <span>
-            <?= $fetch_posts['category']; ?>
+            {{ item.post.category }}
+            
           </span></a>
         <div class="icons">
           <a href="view_post.php?post_id=<?= $post_id; ?>"><i class="fas fa-comment"></i><span>(
@@ -213,7 +201,9 @@ include 'components/like_post.php';
             </span>
           </button>
         </div>
+        
       </form>
+      {% endfor %}
       <!--
 <?php
          }
@@ -225,15 +215,15 @@ include 'components/like_post.php';
     </div>
 
     <div class="more-btn" style="text-align: center; margin-top: 1rem">
-      <a href="posts.php" class="inline-btn">view all posts</a>
+      <a href="{{ post. }}" class="inline-btn">view all posts</a>
     </div>
   </section>
+  {% endblock %}
+
+
   <!--
  <?php include 'components/footer.php'; ?>
 -->
 
 
-  <script src="static/script.js"></script>
-</body>
-
-</html>
+ 
