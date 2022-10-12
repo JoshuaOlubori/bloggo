@@ -1,5 +1,6 @@
 
 <!-- 
+  START SESSION
 <?php
 
 include 'components/connect.php';
@@ -29,6 +30,8 @@ include 'components/like_post.php';
       <div class="box">
         <!--
 
+          
+
  <?php
             $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
             $select_profile->execute([$user_id]);
@@ -45,23 +48,24 @@ include 'components/like_post.php';
 
         <p>
           welcome <span>
-            <?= $fetch_profile['name']; ?>
+            <?= $fetch_profile['name']; ?> <!-- DISPLAY LOGGED IN USER NAME-->
           </span>
         </p>
         <p>
           total comments : <span>
-            <?= $total_user_comments; ?>
+            <?= $total_user_comments; ?> <!-- DISPLAY LOGGED IN USER TOTAL COMMENTS-->
           </span>
         </p>
         <p>
           posts liked : <span>
-            <?= $total_user_likes; ?>
+            <?= $total_user_likes; ?> <!-- DISPLAY LOGGED IN USER TOTAL LIKES-->
           </span>
         </p>
-        <a href="update.php" class="btn">update profile</a>
+        <a href="update.php" class="btn">update profile</a> <!-- LINK TO UPDATE USER'S PROFILE-->
         <div class="flex-btn">
-          <a href="user_likes.php" class="option-btn">likes</a>
-          <a href="user_comments.php" class="option-btn">comments</a>
+          <a href="user_likes.php" class="option-btn">likes</a> <!-- LINK TO POSTS USER HAS LIKED-->
+          <a href="user_comments.php" 
+          class="option-btn">comments</a>  <!-- LINK TO COMMENTS USER HAS MADE-->
         </div>
 
         <!--
@@ -73,7 +77,9 @@ include 'components/like_post.php';
         <p class="name">login or register!</p>
         <div class="flex-btn">
           <a href="login.php" class="option-btn">login</a>
+          <!-- LINK TO LOGIN FORM FOR USERS-->
           <a href="register.php" class="option-btn">register</a>
+          <!-- LINK TO REGISTER FORM FOR UNAUTH USERS-->
         </div>
         <!--
  <?php
@@ -85,16 +91,16 @@ include 'components/like_post.php';
       <div class="box">
         <p>categories</p>
         <div class="flex-box">
-          <a href="category.php?category=nature" class="links">nature</a>
-          <a href="category.php?category=education" class="links">education</a>
-          <a href="category.php?category=business" class="links">business</a>
-          <a href="category.php?category=travel" class="links">travel</a>
-          <a href="category.php?category=news" class="links">news</a>
-          <a href="category.php?category=gaming" class="links">gaming</a>
-          <a href="category.php?category=sports" class="links">sports</a>
-          <a href="category.php?category=design" class="links">design</a>
-          <a href="category.php?category=fashion" class="links">fashion</a>
-          <a href="category.php?category=personal" class="links">personal</a>
+          <a href="{% url 'blog:get_posts_of_category' 'NATURE' %}" class="links">nature</a>
+          <a href="{% url 'blog:get_posts_of_category' 'EDUCATION' %}" class="links">education</a>
+          <a href="{% url 'blog:get_posts_of_category' 'BUSINESS' %}" class="links">business</a>
+          <a href="{% url 'blog:get_posts_of_category' 'TRAVEL' %}" class="links">travel</a>
+          <a href="{% url 'blog:get_posts_of_category' 'NEWS' %}" class="links">news</a>
+          <a href="{% url 'blog:get_posts_of_category' 'GAMING' %}" class="links">gaming</a>
+          <a href="{% url 'blog:get_posts_of_category' 'SPORTS' %}" class="links">sports</a>
+          <a href="{% url 'blog:get_posts_of_category' 'DESIGN' %}" class="links">design</a>
+          <a href="{% url 'blog:get_posts_of_category' 'FASHION' %}" class="links">fashion</a>
+          <a href="{% url 'blog:get_posts_of_category' 'PERSON' %}" class="links">personal</a>
           <a href="{% url 'blog:category_list' %}" class="btn">view all</a>
         </div>
       </div>
@@ -119,7 +125,7 @@ include 'components/like_post.php';
          ?> 
             -->
 
-          <a href="authors.php" class="btn">view all</a>
+          <a href="{% url 'blog:display_authors' %}" class="btn">view all</a>
         </div>
       </div>
     </div>
@@ -183,7 +189,7 @@ include 'components/like_post.php';
         <div class="post-content content-150">
           {{ item.post.content|truncatewords:30 }}
         </div>
-        <a href="{% url 'blog:post_detail' item.post.id %}" class="inline-btn">read more</a>
+        <a href="{{ item.post.get_absolute_url }}" class="inline-btn">read more</a>
         <a href="category.php?category=<?= $fetch_posts['category']; ?>" class="post-cat">
           <i class="fas fa-tag"></i>
           <span>

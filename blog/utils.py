@@ -1,5 +1,5 @@
-def post_counts(posts):
-    if not posts:
+def total_author_counts(author):
+    if not author:
         return 0
 
-    return sum(post)
+    return len(author)

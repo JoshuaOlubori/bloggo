@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %} Categories {% endblock %}   
+{% block content %}
+
+<!--
+<?php
+
+include 'components/connect.php';
+
+session_start();
+
+if(isset($_SESSION['user_id'])){
+   $user_id = $_SESSION['user_id'];
+}else{
+   $user_id = '';
+};
+
+include 'components/like_post.php';
+
+?>
+-->
+   
+<section class="categories">
+
+   <h1 class="heading">post categories</h1>
+
+   <div class="box-container">
+      <div class="box"><span>01</span><a href="{% url 'blog:get_posts_of_category' 'NATURE' %}">nature</a></div>
+      <div class="box"><span>02</span><a href="{% url 'blog:get_posts_of_category' 'EDUCATION' %}">education</a></div>
+      <div class="box"><span>03</span><a href="{% url 'blog:get_posts_of_category' 'PETS_AND_ANIMALS' %}">pets and animals</a></div>
+      <div class="box"><span>04</span><a href="{% url 'blog:get_posts_of_category' 'TECHNOLOGY' %}">technology</a></div>
+      <div class="box"><span>05</span><a href="{% url 'blog:get_posts_of_category' 'FASHION' %}">fashion</a></div>
+      <div class="box"><span>06</span><a href="{% url 'blog:get_posts_of_category' 'ENTERTAINMENT' %}">entertainment</a></div>
+      <div class="box"><span>07</span><a href="{% url 'blog:get_posts_of_category' 'MOVIES' %}">movies</a></div>
+      <div class="box"><span>08</span><a href="{% url 'blog:get_posts_of_category' 'GAMING' %}">gaming</a></div>
+      <div class="box"><span>09</span><a href="{% url 'blog:get_posts_of_category' 'MUSIC' %}">music</a></div>
+      <div class="box"><span>10</span><a href="{% url 'blog:get_posts_of_category' 'SPORTS' %}">sports</a></div>
+      <div class="box"><span>11</span><a href="{% url 'blog:get_posts_of_category' 'NEWS' %}">news</a></div>
+      <div class="box"><span>12</span><a href="{% url 'blog:get_posts_of_category' 'TRAVEL' %}">travel</a></div>
+      <div class="box"><span>13</span><a href="{% url 'blog:get_posts_of_category' 'COMEDY' %}">comedy</a></div>
+      <div class="box"><span>14</span><a href="{% url 'blog:get_posts_of_category' 'DESIGN_AND_DEVELOPMENT' %}">design and development</a></div>
+      <div class="box"><span>15</span><a href="{% url 'blog:get_posts_of_category' 'FOOD_AND_DRINKS' %}">food and drinks</a></div>
+      <div class="box"><span>16</span><a href="{% url 'blog:get_posts_of_category' 'LIFESTYLE' %}">lifestyle</a></div>
+      <div class="box"><span>17</span><a href="{% url 'blog:get_posts_of_category' 'HEALTH_AND_FITNESS' %}">health and fitness</a></div>
+      <div class="box"><span>18</span><a href="{% url 'blog:get_posts_of_category' 'BUSINESS' %}">business</a></div>
+      <div class="box"><span>19</span><a href="{% url 'blog:get_posts_of_category' 'SHOPPING' %}">shopping</a></div>
+      <div class="box"><span>20</span><a href="c{% url 'blog:get_posts_of_category' 'ANIMATIONS' %}">animations</a></div>
+   </div>
+
+</section>
+
+
+{% endblock %}
