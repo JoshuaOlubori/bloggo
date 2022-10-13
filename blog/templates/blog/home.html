@@ -156,7 +156,7 @@ include 'components/like_post.php';
                $confirm_likes->execute([$user_id, $post_id]);
       ?>
     -->
-    {% for item in posts %}
+    {% for post in posts %}
       <form class="box" method="post">
         
       <!-- <input type="hidden" name="post_id" value="<?= $post_id; ?>" /> -->
@@ -165,35 +165,28 @@ include 'components/like_post.php';
           <i class="fas fa-user"></i>
           <div>
             <a href="#">
-              {{ item.post.author }}
+              {{ post.author }}
             </a>
             <div>
-              {{ item.post.created }}
+              {{ post.created }}
             </div>
           </div>
         </div>
 
-        <!--
-<?php
-            if($fetch_posts['image'] != ''){  
-         ?>
-         <img src="uploaded_img/<?= $fetch_posts['image']; ?>" class="post-image" alt="">
-         <?php
-         }
-         ?>
-         -->
 
+         <img src="{{ post.cover.url }}" class="post-image" alt="">
+?
         <div class="post-title">
-          {{ item.post.title }}
+          {{ post.title }}
         </div>
         <div class="post-content content-150">
-          {{ item.post.content|truncatewords:30 }}
+          {{ post.content|truncatewords:30 }}
         </div>
-        <a href="{{ item.post.get_absolute_url }}" class="inline-btn">read more</a>
+        <a href="{{ post.get_absolute_url }}" class="inline-btn">read more</a>
         <a href="category.php?category=<?= $fetch_posts['category']; ?>" class="post-cat">
           <i class="fas fa-tag"></i>
           <span>
-            {{ item.post.category }}
+            {{ post.category }}
             
           </span></a>
         <div class="icons">

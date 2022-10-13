@@ -1,19 +1,25 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post
 from .utils import total_author_counts
+from django.views.generic import ListView
 
 # Create your views here.
+class PostListView(ListView):
+    queryset=Post.published.all()
+    context_object_name='posts'
+    template_name='blog/home.html'
 
-def post_list(request):
-    posts = Post.published.all()
-    #likes = Post
-    post_list = []
-    for post in posts:
-        
-        post_list.append({'post':post})
-    context = {'posts': post_list}
-    return render(request, 'blog/home.html', context)
-
+#def post_list(request, cover):
+#    post = get_object_or_404(Post, image=cover)
+#    posts = Post.published.all()
+#    #likes = Post
+#    post_list = []
+#    for post in posts:
+#        
+#        post_list.append({'post':post})
+#    context = {'posts': post_list}
+#    return render(request, 'blog/home.html', context)
+#
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(Post,status=Post.Status.PUBLISHED,
     slug=post,

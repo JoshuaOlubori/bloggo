@@ -45,7 +45,7 @@ class Post(models.Model):
         User, on_delete=models.CASCADE, related_name='blog_posts')
     content = models.TextField()
     category = models.CharField(max_length=50, choices=Category.choices)
-    #image = models.ImageField(upload_to='featured_image/%Y/%m/%d/')
+    cover = models.ImageField(upload_to='image', default='default.png')
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
