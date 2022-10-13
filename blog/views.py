@@ -1,22 +1,23 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post
-from .utils import total_author_counts
+from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView
 
 # Create your views here.
-#class HomeView(ListView):
-#    queryset=Post.published.all()[:5]
-#    context_object_name='posts'
-#    template_name='blog/home.html'
+class HomeView(ListView):
+    queryset=Post.published.all()[:5]
+    context_object_name='posts'
+    template_name='blog/home.html'
 
 class PostListView(ListView):
     queryset=Post.published.all()
     context_object_name='all_posts'
     template_name='blog/post_list.html'
+    paginate_by=2
 
-def home(request):
-    posts = Post.published.all()[:5]
-    return render(request, 'blog/home.html', {'posts':posts})
+#def home(request):
+#    posts = Post.published.all()[:5]
+#    return render(request, 'blog/home.html', {'posts':posts})
 #
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(Post,status=Post.Status.PUBLISHED,
