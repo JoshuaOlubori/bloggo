@@ -68,6 +68,9 @@ class Post(models.Model):
 self.publish.day,
 self.slug])
 
+    def all_posts(self):
+        return reverse('blog:post_list')
+
 
 
 class Comments(models.Model):

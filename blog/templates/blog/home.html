@@ -175,7 +175,7 @@ include 'components/like_post.php';
 
 
          <img src="{{ post.cover.url }}" class="post-image" alt="">
-?
+
         <div class="post-title">
           {{ post.title }}
         </div>
@@ -212,12 +212,13 @@ include 'components/like_post.php';
       ?>
       -->
     </div>
-
+    
     <div class="more-btn" style="text-align: center; margin-top: 1rem">
-      <a href="{{ post. }}" class="inline-btn">view all posts</a>
+      <a href="{% url 'blog:post_list' %}" class="inline-btn">view all posts</a>
     </div>
   </section>
   {% endblock %}
+  
 
 
   <!--
