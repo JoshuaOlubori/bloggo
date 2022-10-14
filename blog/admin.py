@@ -12,5 +12,11 @@ class PostAdmin(admin.ModelAdmin):
     date_hierarchy = 'publish'
     ordering = ['status', 'publish']
 
-admin.site.register(Comments)
+@admin.register(Comments)
+class CommentsAdmin(admin.ModelAdmin):
+    list_display = ['commenter','post', 'body','created', 'active']
+    list_filter = ['active', 'created', 'updated']
+    search_fields = ['commenter', 'body']
+
+    
 admin.site.register(Likes)

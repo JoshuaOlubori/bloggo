@@ -34,7 +34,7 @@ include 'components/like_post.php';
 <!-- <?php include 'components/user_header.php'; ?> -->
 <!-- header section ends -->
 <h1 class="heading">post categories</h1>
-{% for item in posts %}
+{% for post in posts %}
 
 <section class="posts-container">
 
@@ -72,23 +72,15 @@ include 'components/like_post.php';
          <div class="post-admin">
             <i class="fas fa-user"></i>
             <div>
-               <a href="author_posts.php?author=<?= $fetch_posts['name']; ?>"><?= $fetch_posts['name']; ?></a>
-               <div><?= $fetch_posts['date']; ?></div>
+               <a href="author_posts.php?author=<?= $fetch_posts['name']; ?>">{{ post.author }}</a>
+               <div>{{ post.updated }}</div>
             </div>
          </div>
          
-         <!--
- <?php
-            if($fetch_posts['image'] != ''){  
-         ?>
-         <img src="uploaded_img/<?= $fetch_posts['image']; ?>" class="post-image" alt="">
-         <?php
-         }
-         ?>
-         -->
+         <img src="{{ post.cover.url }}" class="post-image" alt="">
         
-         <div class="post-title"><?= $fetch_posts['title']; ?></div>
-         <div class="post-content content-150">{{ item.content }}</div>
+         <div class="post-title">{{ post.title }}</div>
+         <div class="post-content content-150">{{ post.content|truncatewords:30 }}</div>
          <a href="view_post.php?post_id=<?= $post_id; ?>" class="inline-btn">read more</a>
          <div class="icons">
             <a href="view_post.php?post_id=<?= $post_id; ?>"><i class="fas fa-comment"></i><span>(<?= $total_post_comments; ?>)</span></a>
@@ -109,6 +101,7 @@ include 'components/like_post.php';
 
 </section>
 {% endfor %}
+{% include "pagination.html" with page=posts %}
 {% endblock %}
 
 

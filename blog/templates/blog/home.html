@@ -100,7 +100,7 @@ include 'components/like_post.php';
           <a href="{% url 'blog:get_posts_of_category' 'SPORTS' %}" class="links">sports</a>
           <a href="{% url 'blog:get_posts_of_category' 'DESIGN' %}" class="links">design</a>
           <a href="{% url 'blog:get_posts_of_category' 'FASHION' %}" class="links">fashion</a>
-          <a href="{% url 'blog:get_posts_of_category' 'PERSON' %}" class="links">personal</a>
+          <a href="{% url 'blog:get_posts_of_category' 'PERSONAL' %}" class="links">personal</a>
           <a href="{% url 'blog:category_list' %}" class="btn">view all</a>
         </div>
       </div>
@@ -183,7 +183,8 @@ include 'components/like_post.php';
           {{ post.content|truncatewords:30 }}
         </div>
         <a href="{{ post.get_absolute_url }}" class="inline-btn">read more</a>
-        <a href="category.php?category=<?= $fetch_posts['category']; ?>" class="post-cat">
+
+        <a href="{% url 'blog:get_posts_of_category' post.category %}" class="post-cat">
           <i class="fas fa-tag"></i>
           <span>
             {{ post.category }}
