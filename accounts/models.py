@@ -1,0 +1,9 @@
+from django.db import models
+from django.conf import settings
+
+# Create your models here.
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+ on_delete=models.CASCADE)
+    bio = models.CharField(max_length=255, blank=True)
+    photo = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
