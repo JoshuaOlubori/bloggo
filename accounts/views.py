@@ -1,9 +1,11 @@
 from http.client import HTTPResponse
+import re
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm,  UserRegistrationForm
 from django.contrib.auth.decorators import login_required
+from .models import Profile
 
 # Create your views here.
 
@@ -42,3 +44,22 @@ def register(request):
     return render(request,
  'accounts/register.html',
  {'user_form': user_form})
+
+
+def register(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            # create a new user obj but don't save it yet
+            new_user=user_form.save(commit=False)
+            # set the chosen password
+            new_user.set_password(user_form.cleaned_data['password'])
+            #save user obj
+            new_user.save()
+            # create user profile
+            Profile.objects.create(user=new_user)
+            return render(request, 'accounts/register_done.html', {'new_user': new_user})
+
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'accounts/register.html', {'user_form': user_form})
