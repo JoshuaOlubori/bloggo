@@ -20,7 +20,8 @@ urlpatterns = [
          name='password_reset_done'),
     path('password-reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(success_url=reverse_lazy('accounts:password_reset_complete')), name='password_reset_confirm'), path('password-reset/complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('', include('django.contrib.auth.urls')),
-    path('register/', views.register, name='register')
+    path('register/', views.register, name='register'),
+    path('edit/', views.edit, name='edit')
 
 
     #path('', views.dashboard, name='dashboard'),

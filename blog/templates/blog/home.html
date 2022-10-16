@@ -27,6 +27,8 @@ include 'components/like_post.php';
 {% block content %} 
   <section class="home-grid">
     <div class="box-container">
+
+      {% if request.user.is_authenticated  %}
       <div class="box">
         <!--
 
@@ -61,7 +63,7 @@ include 'components/like_post.php';
             <?= $total_user_likes; ?> <!-- DISPLAY LOGGED IN USER TOTAL LIKES-->
           </span>
         </p>
-        <a href="update.php" class="btn">update profile</a> <!-- LINK TO UPDATE USER'S PROFILE-->
+        <a href="{% url 'accounts:edit' %}" class="btn">update profile</a> <!-- LINK TO UPDATE USER'S PROFILE-->
         <div class="flex-btn">
           <a href="user_likes.php" class="option-btn">likes</a> <!-- LINK TO POSTS USER HAS LIKED-->
           <a href="user_comments.php" 
@@ -74,19 +76,28 @@ include 'components/like_post.php';
          ?>
          -->
 
-        <p class="name">login or register!</p>
-        <div class="flex-btn">
-          <a href="login.php" class="option-btn">login</a>
-          <!-- LINK TO LOGIN FORM FOR USERS-->
-          <a href="register.php" class="option-btn">register</a>
-          <!-- LINK TO REGISTER FORM FOR UNAUTH USERS-->
-        </div>
+    <!--
+      
+    -->   
         <!--
  <?php
           }
          ?>
             -->
       </div>
+
+      {% else %}
+      <div class="box">
+        <p>
+          Hello stranger! 
+        </p>
+        <p>
+      
+          <a href="{% url 'accounts:register' %}" class="btn">register</a>
+        </p>
+
+      </div>
+      {% endif %}
 
       <div class="box">
         <p>categories</p>

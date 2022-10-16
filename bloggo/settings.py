@@ -19,6 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-d+i6yvbuzyxp58uo-$ge58*zbdduxop--9*-m4j!v67f%*_-%v'
 
@@ -141,3 +142,8 @@ LOGOUT_URL = 'logout'
 
 # Email configurations
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# custom authentication to allow login via email
+AUTHENTICATION_BACKENDS = [
+ 'accounts.authentication.EmailAuthBackend',
+]

@@ -67,6 +67,7 @@ if(isset($message)){
         <a href="register.php"> <i class="fas fa-angle-right"></i> register</a>
      </nav>
 
+     {% endif %}
      <div class="profile">
 
        <!--
@@ -77,17 +78,24 @@ if(isset($message)){
               $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
         ?>
        -->
-      
-        <p class="name"><?= $fetch_profile['name']; ?></p>
-        <a href="update.php" class="btn">update profile</a>
-        <div class="flex-btn">
-           <a href="{% url 'accounts:login' %}" class="option-btn">login</a>
-           <a href="register.php" class="option-btn">register</a>
-        </div> 
-        <a href="{% url 'accounts:logout' %}" onclick="return confirm('logout from this website?');" class="delete-btn">logout</a>
-        {% else %}
-        <a href="{% url 'accounts:login' %}" class="option-btn">log in</a>
-        {% endif %}
+       {% if request.user.is_authenticated %}
+       <p class="name"><?= $fetch_profile['name']; ?></p>
+       <a href="{% url 'accounts:edit' %}" class="btn">update profile</a>
+
+       <a href="{% url 'accounts:logout' %}" onclick="return confirm('logout from this website?');" class="delete-btn">logout</a>
+       {% else %}
+       <div class="flex-btn">
+          
+         <a href="{% url 'accounts:login' %}" class="option-btn">login</a>
+         <a href="{% url 'accounts:register' %}" class="option-btn">register</a>
+      </div>
+       {% endif %}
+        
+
+
+         
+        
+       
         <!--
 <?php
            }else{
@@ -104,6 +112,16 @@ if(isset($message)){
   </section>
 
 </header>
+{% if messages %}
+ <ul class="messages">
+ {% for message in messages %}
+ <li class="{{ message.tags }}">
+ {{ message|safe }}
+ <a href="#" class="close">x</a>
+</li>
+{% endfor %}
+</ul>
+{% endif %}
 
     {% block content %}
     {% endblock %}
