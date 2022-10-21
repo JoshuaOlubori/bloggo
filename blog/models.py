@@ -72,7 +72,7 @@ class Post(models.Model):
         return reverse('blog:post_list')
 
 
-class Comments(models.Model):
+class Comment(models.Model):
     post = models.ForeignKey(Post,
                              on_delete=models.CASCADE,
                              related_name='comments')
@@ -91,7 +91,7 @@ class Comments(models.Model):
         return f'Comment by {self.commenter} on {self.post}'
 
 
-class Likes(models.Model):
+class Like(models.Model):
     liker = models.ForeignKey(
         User, null=True, on_delete=models.SET_NULL, related_name='likes')
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

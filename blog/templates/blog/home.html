@@ -50,17 +50,17 @@ include 'components/like_post.php';
 
         <p>
           welcome <span>
-            <?= $fetch_profile['name']; ?> <!-- DISPLAY LOGGED IN USER NAME-->
+            {{ request.user.username|title }} <!-- DISPLAY LOGGED IN USER NAME-->
           </span>
         </p>
         <p>
           total comments : <span>
-            <?= $total_user_comments; ?> <!-- DISPLAY LOGGED IN USER TOTAL COMMENTS-->
+            {{ request.user.comments.count }} <!-- DISPLAY LOGGED IN USER TOTAL COMMENTS-->
           </span>
         </p>
         <p>
           posts liked : <span>
-            <?= $total_user_likes; ?> <!-- DISPLAY LOGGED IN USER TOTAL LIKES-->
+            {{ request.user.likes.count  }} <!-- DISPLAY LOGGED IN USER TOTAL LIKES-->
           </span>
         </p>
         <a href="{% url 'accounts:edit' %}" class="btn">update profile</a> <!-- LINK TO UPDATE USER'S PROFILE-->
@@ -202,13 +202,11 @@ include 'components/like_post.php';
             
           </span></a>
         <div class="icons">
-          <a href="view_post.php?post_id=<?= $post_id; ?>"><i class="fas fa-comment"></i><span>(
-              <?= $total_post_comments; ?>)
+          <a href="{{ post.get_absolute_url }}"><i class="fas fa-comment"></i><span>{{ comments }}
             </span></a>
           <button type="submit" name="like_post">
             <i class="fas fa-heart"
-              style="<?php if($confirm_likes->rowCount() > 0){ echo 'color:var(--red);'; } ?>  "></i><span>(
-              <?= $total_post_likes; ?>)
+              style="<?php if($confirm_likes->rowCount() > 0){ echo 'color:var(--red);'; } ?>  "></i><span>{{ likes }}
             </span>
           </button>
         </div>

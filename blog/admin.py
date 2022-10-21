@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comments, Likes
+from .models import Post, Comment, Like
 
 # Register your models here.
 
@@ -12,11 +12,11 @@ class PostAdmin(admin.ModelAdmin):
     date_hierarchy = 'publish'
     ordering = ['status', 'publish']
 
-@admin.register(Comments)
+@admin.register(Comment)
 class CommentsAdmin(admin.ModelAdmin):
     list_display = ['commenter','post', 'body','created', 'active']
     list_filter = ['active', 'created', 'updated']
     search_fields = ['commenter', 'body']
 
 
-admin.site.register(Likes)
+admin.site.register(Like)
